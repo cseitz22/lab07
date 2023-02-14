@@ -1,7 +1,7 @@
 ---
 title: "Lab 07 - Conveying the right message through visualisation"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Cat Seitz"
+date: "02/13/2023"
 output: github_document
 ---
 
@@ -13,13 +13,28 @@ library(tidyverse)
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+The original visualization is quite misleading. 1) There are 2 y-axes that aren't labeled, so we can't really tell which one is the average daily cases. They somewhat make it seem like the mask counties correspond to the left axis and the no-mask counties correspond to the right axis, but that seems weird because the y-axes aren't that different. 2) The x-axis is only 15-ish days worth of data, so the graph creator could've chosen a time frame that displayed that not wearing masks is better for not contracting COVID.  
+
+```{r create-dataframe}
+
+
+
+```
 
 ### Exercise 2
 
-...
+```{r make-visualization}
 
-Add exercise headings as needed.
+
+
+```
+
+
+### Exercise 3
+
+Why is this visualization better?
+
+
+### Exercise 4
+
+What does the data tell us about mask wearing and COVID?
