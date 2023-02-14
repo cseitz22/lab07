@@ -9,15 +9,67 @@ output: github_document
 
 ```{r load-packages, message=FALSE}
 library(tidyverse) 
+library(dsbox)
+library(mosaicData) 
+library(ggbreak) 
+library(patchwork)
 ```
 
 ### Exercise 1
 
-The original visualization is quite misleading. 1) There are 2 y-axes that aren't labeled, so we can't really tell which one is the average daily cases. They somewhat make it seem like the mask counties correspond to the left axis and the no-mask counties correspond to the right axis, but that seems weird because the y-axes aren't that different. 2) The x-axis is only 15-ish days worth of data, so the graph creator could've chosen a time frame that displayed that not wearing masks is better for not contracting COVID.  
+The original visualization is quite misleading. At first glance, they are trying to make it seem like wearing masks decreases the number of COVID cases. However, there are several problems with their plot. 1) There are 2 y-axes that aren't labeled, so we can't really tell which one is the average daily cases. They make it seem like the mask counties correspond to the left axis and the no-mask counties correspond to the right axis, but it's not super clear and that seems weird because the y-axes aren't that different. 2) Also, the x-axis is only 15-ish days worth of data, so the graph creator could've chosen a time frame that displayed that wearing masks is better for not contracting COVID.
 
 ```{r create-dataframe}
 
-
+mask<- tribble(
+  ~date, ~count, ~mask_status,
+  "7/12/2020", 25, "mask",
+  "7/13/2020", 22, "mask",
+  "7/14/2020", 20, "mask",
+  "7/15/2020", 20, "mask",
+  "7/16/2020", 21, "mask",
+  "7/17/2020", 20, "mask",
+  "7/18/2020", 20, "mask",
+  "7/19/2020", 20, "mask",
+  "7/20/2020", 20, "mask",
+  "7/21/2020", 21, "mask",
+  "7/22/2020", 21, "mask",
+  "7/23/2020", 20, "mask",
+  "7/24/2020", 20, "mask",
+  "7/25/2020", 20, "mask",
+  "7/26/2020", 19, "mask",
+  "7/27/2020", 18, "mask",
+  "7/28/2020", 16, "mask",
+  "7/29/2020", 16, "mask",
+  "7/30/2020", 16, "mask",
+  "7/31/2020", 16, "mask",
+  "8/01/2020", 16, "mask",
+  "8/02/2020", 16, "mask",
+  "8/03/2020", 16, "mask",
+  "7/12/2020", 21, "nomask",
+  "7/13/2020", 20, "nomask",
+  "7/14/2020", 20, "nomask",
+  "7/15/2020", 21, "nomask",
+  "7/16/2020", 21, "nomask",
+  "7/17/2020", 21, "nomask",
+  "7/18/2020", 20, "nomask",
+  "7/19/2020", 20, "nomask",
+  "7/20/2020", 20, "nomask",
+  "7/21/2020", 19, "nomask",
+  "7/22/2020", 19, "nomask",
+  "7/23/2020", 19, "nomask",
+  "7/24/2020", 20, "nomask",
+  "7/25/2020", 21, "nomask",
+  "7/26/2020", 21, "nomask",
+  "7/27/2020", 21, "nomask",
+  "7/28/2020", 21, "nomask",
+  "7/29/2020", 21, "nomask",
+  "7/30/2020", 21, "nomask",
+  "7/31/2020", 20, "nomask",
+  "8/01/2020", 20, "nomask",
+  "8/02/2020", 20, "nomask",
+  "8/03/2020", 20, "nomask",
+)
 
 ```
 
@@ -25,7 +77,12 @@ The original visualization is quite misleading. 1) There are 2 y-axes that aren'
 
 ```{r make-visualization}
 
-
+mask %>%
+  ggplot(aes(x = date,
+             y = count,
+             group = mask_status,
+             color = mask_status)) +
+  geom_line()
 
 ```
 
