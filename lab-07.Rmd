@@ -77,6 +77,9 @@ mask<- tribble(
 
 ```{r make-visualization}
 
+xlabels <- sort(unique(mask$date))
+xlabels[seq(2, length(xlabels), 2)] <- ""
+
 mask %>%
   ggplot(aes(x = date,
              y = count,
@@ -84,21 +87,27 @@ mask %>%
              color = mask_status)) +
   geom_line()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  coord_cartesian(ylim = c(0,25))+
   labs(title = "Kansas COVID-19 7-Day Rolling Average of Daily Cases/Per 100K Population",
-       subtitle = "Mask Counties Vs. No-Mask Mandate Counties",
+       subtitle = "Mask Mandate Counties Vs. No-Mask Mandate Counties",
        x="Date",
        y="Average Daily Cases",
        caption = "Source: Kansas Department of Health and Environment")+
-  guides(color=guide_legend(title = "Mask Status"))
+  guides(color=guide_legend(title = "Mask Status"))+
+  scale_x_discrete(labels=xlabels)
 
 ```
 
 
 ### Exercise 3
 
-Why is this visualization better?
-
+In my visualization, the distinction between mask mandate counties and no-mask mandate counties is much more clear, especially with regards to the average daily cases in each place. Now, we can clearly see that no-mask mandate counties have much fewer cases than mask mandate counties, which is opposite to what the original visualization was trying to show. In addition, I made the x-axis display every-other date to make it less cluttered. 
 
 ### Exercise 4
 
-What does the data tell us about mask wearing and COVID?
+This data, which is only 22 days worth of data, shows that counties where there is not a mask mandate have around 10 COVID cases daily and counties with a mask mandate have around 20 COVID cases daily. While this may seem like masks are worse for contracting COVID, there could be a different reason the data look like this. For example, it's likely that counties that enforced a mask mandate were ones that had higher daily cases than counties that didn't enforce a mask mandate. 
+
+
+
+
+
